@@ -1,6 +1,7 @@
 require("dotenv").config();
 var keys = require("./keys")
 var request = require("request")
+var Spotify = require("node-spotify-api")
 
 // Takes an artist and searches the Bands in Town 
 // Artist API for an artist and render information
@@ -25,13 +26,26 @@ var concertThis = function(artist){
 
 // This will take a song, search spotify and return information
 var spotifyThisSong = function(song){
+    // Default should be "The Sign" by Ace of Base
+    console.log(song)
+    if (!song){
+        song = "The Sign Ace of Base"
+    }
 
     var spotify = new Spotify(keys.spotify);
-    //https://www.npmjs.com/package/node-spotify-api
 
-    // Need to return Artist(s), Song Name, Album, Preview link of song from Spotify
+    spotify.search({type: "track", query: song, limit: 1}, function (err, data){
+        if (err) {
+            return console.log(err)
+        }
 
-    // Default should be "The Sign" by Ace of Base
+        // Need to return Artist(s), Song Name, Album, Preview link of song from Spotify
+        var songInfo = data.tracks.items[0]
+        console.log(songInfo.artists[0].name)
+        console.log(songInfo.name)
+        console.log(songInfo.album.name)
+        console.log(songInfo.preview_url)
+    })
 
     // Log everything to log.txt
 }
@@ -39,7 +53,7 @@ var spotifyThisSong = function(song){
 // This will take a movie, search IMDb and return information
 var movieThis = function(movie){
     // Default should be "Mr. Nobody"
-    if (movie === ""){
+    if (!movie){
         movie = "Mr.+Nobody"
     }
 
