@@ -2,6 +2,7 @@ require("dotenv").config();
 var keys = require("./keys")
 var request = require("request")
 var Spotify = require("node-spotify-api")
+var fs = require("fs")
 
 // Takes an artist and searches the Bands in Town 
 // Artist API for an artist and render information
@@ -85,27 +86,39 @@ var movieThis = function(movie){
 var doWhatItSays = function(){
 
     // read from file
+    fs.readFile("random.txt", "utf8", function (err, data) {
+        if(err){
+            return console.log(err)
+        }
+        
+        var dataArr = data.split(",")
 
-    // call appropriate function and pass arguement
-
+        // call appropriate function and pass arguement
+        runAction(dataArr[0], dataArr[1])
+    });
 }
 
-switch (process.argv[2]) {
-    case "concert-this":
-        concertThis(process.argv[3])
-        break
-    case "spotify-this-song":
-        spotifyThisSong(process.argv[3])
-        break
-    case "movie-this":
-        movieThis(process.argv[3])
-        break
-    case "do-what-it-says":
-        doWhatItSays()
-        break
-    default:
-        console.log("That is not a command that I recognize, please try again.") 
+var runAction = function(func, parm) {
+    switch (func) {
+        case "concert-this":
+            concertThis(parm)
+            break
+        case "spotify-this-song":
+            spotifyThisSong(parm)
+            break
+        case "movie-this":
+            movieThis(parm)
+            break
+        case "do-what-it-says":
+            doWhatItSays()
+            break
+        default:
+            console.log("That is not a command that I recognize, please try again.") 
+    }
 }
+
+runAction(process.argv[2], process.argv[3])
+
 
 
 
