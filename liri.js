@@ -6,10 +6,20 @@ var request = require("request")
 // Artist API for an artist and render information
 var concertThis = function(artist){
 
-    var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
+    var queryUrl = "https://rest.bandsintown.com/artists/" + artist.replace(" ", "+") + "/events?app_id=codingbootcamp"
+    console.log(queryUrl);
+    
+    request(queryUrl, function(err, response, body){
+        // If the request is successful
+        if (!err && response.statusCode === 200) {
+            // Need to return Name of venue, Venue location, Date of event (MM/DD/YYYY)
+            console.log("Venue: " + JSON.parse(body)[0].venue.name)
+            console.log("Location: " + JSON.parse(body)[0].venue.city + ", " + JSON.parse(body)[0].venue.region);
+            console.log("Date: " + JSON.parse(body)[0].datetime)
 
-    // Need to return Nave of venue, Venue location, Date of event (MM/DD/YYYY)
-
+            // Log everything to log.txt
+        }
+    })
     // Log everything to log.txt
 }
 
