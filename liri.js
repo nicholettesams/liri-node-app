@@ -2,6 +2,7 @@ require("dotenv").config();
 var keys = require("./keys")
 var request = require("request")
 var Spotify = require("node-spotify-api")
+var dateFormat = require("dateFormat")
 var fs = require("fs")
 
 // Takes an artist and searches the Bands in Town 
@@ -17,7 +18,7 @@ var concertThis = function(artist){
             // Need to return Name of venue, Venue location, Date of event (MM/DD/YYYY)
             outputData("Venue: " + JSON.parse(body)[0].venue.name)
             outputData("Location: " + JSON.parse(body)[0].venue.city + ", " + JSON.parse(body)[0].venue.region);
-            outputData("Date: " + JSON.parse(body)[0].datetime)
+            outputData("Date: " + dateFormat(JSON.parse(body)[0].datetime, "mm/dd/yyyy"))
         }
     })
 }
