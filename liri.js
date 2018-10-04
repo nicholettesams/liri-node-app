@@ -16,9 +16,11 @@ var concertThis = function(artist){
         // If the request is successful
         if (!err && response.statusCode === 200) {
             // Need to return Name of venue, Venue location, Date of event (MM/DD/YYYY)
-            outputData("Venue: " + JSON.parse(body)[0].venue.name)
-            outputData("Location: " + JSON.parse(body)[0].venue.city + ", " + JSON.parse(body)[0].venue.region);
-            outputData("Date: " + dateFormat(JSON.parse(body)[0].datetime, "mm/dd/yyyy"))
+            for (i=0; i < JSON.parse(body).length; i++) {
+                outputData("Venue: " + JSON.parse(body)[i].venue.name)
+                outputData("Location: " + JSON.parse(body)[i].venue.city + ", " + JSON.parse(body)[i].venue.region);
+                outputData("Date: " + dateFormat(JSON.parse(body)[i].datetime, "mm/dd/yyyy"))
+            }
         }
     })
 }
