@@ -8,18 +8,28 @@ var fs = require("fs")
 // Takes an artist and searches the Bands in Town 
 // Artist API for an artist and render information
 var concertThis = function(artist){
-
+    var region = ""
     var queryUrl = "https://rest.bandsintown.com/artists/" + artist.replace(" ", "+") + "/events?app_id=codingbootcamp"
     //console.log(queryUrl);
     
     request(queryUrl, function(err, response, body){
         // If the request is successful
         if (!err && response.statusCode === 200) {
-            // Need to return Name of venue, Venue location, Date of event (MM/DD/YYYY)
-            for (i=0; i < JSON.parse(body).length; i++) {
-                outputData("Venue: " + JSON.parse(body)[i].venue.name)
-                outputData("Location: " + JSON.parse(body)[i].venue.city + ", " + JSON.parse(body)[i].venue.region);
-                outputData("Date: " + dateFormat(JSON.parse(body)[i].datetime, "mm/dd/yyyy"))
+            // Save parsed body in a new variable for easier use
+            var concertInfo = JSON.parse(body)
+
+            for (i=0; i < concertInfo.length; i++) {
+                
+                region = concertInfo[i].venue.region
+                 //handle Canadian venues
+                if (region === "") {
+                    region = concertInfo[i].venue.country
+                }
+
+                // Need to return Name of venue, Venue location, Date of event (MM/DD/YYYY)
+                outputData("Venue: " + concertInfo[i].venue.name)
+                outputData("Location: " + concertInfo[i].venue.city + ", " + region);
+                outputData("Date: " + dateFormat(concertInfo[i].datetime, "mm/dd/yyyy"))
             }
         }
     })
@@ -64,14 +74,16 @@ var movieThis = function(movie){
         if (!err && response.statusCode === 200) {
             // Need to return: Title, Year, IMDB Rating, Rotten Tomatoes Rating, Country, 
             // Language, Plot, Actors
-            outputData("Title: " + JSON.parse(body).Title)
-            outputData("Release year: " + JSON.parse(body).Year)
-            outputData("IMDB Rating: " + JSON.parse(body).imdbRating)
-            outputData("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value)
-            outputData("Country: " + JSON.parse(body).Country)
-            outputData("Language: " + JSON.parse(body).Language)
-            outputData("Plot: " + JSON.parse(body).Plot)
-            outputData("Actors: " + JSON.parse(body).Actors)
+            var movieInfo = JSON.parse(body)
+
+            outputData("Title: " + movieInfo.Title)
+            outputData("Release year: " + movieInfo.Year)
+            outputData("IMDB Rating: " + movieInfo.imdbRating)
+            outputData("Rotten Tomatoes Rating: " + movieInfo.Ratings[1].Value)
+            outputData("Country: " + movieInfo.Country)
+            outputData("Language: " + movieInfo.Language)
+            outputData("Plot: " + movieInfo.Plot)
+            outputData("Actors: " + movieInfo.Actors)
         }
     })
 }
