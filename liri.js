@@ -17,6 +17,8 @@ var concertThis = function(artist){
         if (!err && response.statusCode === 200) {
             // Save parsed body in a new variable for easier use
             var concertInfo = JSON.parse(body)
+            
+            outputData(artist + " concert information:")
 
             for (i=0; i < concertInfo.length; i++) {
                 
