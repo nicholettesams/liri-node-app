@@ -20,10 +20,11 @@ JavaScript, Node.js, Request library, Spotify API, dateFormat library, File syst
   `node liri.js concert-this <artist/band name>`
 
    * This will search the Bands in Town Artist Events API for an artist and show the following information about each event in the terminal and to the log.txt file:
+
     ```
-     * Name of the venue
-     * Venue location
-     * Date of the Event 
+      * Name of the venue
+      * Venue location
+      * Date of the Event 
     ```
 
 ## `spotify-this-song`
@@ -31,11 +32,12 @@ JavaScript, Node.js, Request library, Spotify API, dateFormat library, File syst
   `node liri.js spotify-this-song '<song name>'`
 
    * This will search the Spotify API for a song and show the following information about the song in the `terminal` and to the `log.txt` file:
+   
     ```
-     * Artist(s)
-     * The song's name
-     * A preview link of the song from Spotify
-     * The album that the song is from
+      * Artist(s)
+      * The song's name
+      * A preview link of the song from Spotify
+      * The album that the song is from
     ```
 
 ## `movie-this`
