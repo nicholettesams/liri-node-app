@@ -1,21 +1,21 @@
 # LIRI Bot
 
-# Assignment
+## Assignment
 
 Create a CLI App "LIRI" bot which stands for Language Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
 
-# Solution
+## Solution
 
 The solution was to use "backend" technologies only.  Node.js was used along with NPM (Node Package Manager) libraries in order to accomplish the tasks. There is no front end to this application, therefore this is no html page to publish.
 
-# Technologies
+## Technologies
 JavaScript, Node.js, Request library, Spotify API, dateFormat library, File system library.
 
-# Using LIRI
+## Using LIRI
 
 ![LIRI Command Examples](screenshots/commands.jpg?raw=true "LIRI Command Examples")
 
-## `concert-this`
+### `concert-this`
 
   `node liri.js concert-this <artist/band name>`
 
@@ -27,7 +27,7 @@ JavaScript, Node.js, Request library, Spotify API, dateFormat library, File syst
       * Date of the Event 
     ```
 
-## `spotify-this-song`
+### `spotify-this-song`
 
   `node liri.js spotify-this-song '<song name>'`
 
@@ -40,7 +40,7 @@ JavaScript, Node.js, Request library, Spotify API, dateFormat library, File syst
       * The album that the song is from
     ```
 
-## `movie-this`
+### `movie-this`
 
   `node liri.js movie-this '<movie name here>'`
 
@@ -57,7 +57,7 @@ JavaScript, Node.js, Request library, Spotify API, dateFormat library, File syst
       * Actors in the movie.
     ```
 
-## `do-what-it-says`
+### `do-what-it-says`
   `node liri.js do-what-it-says`
 
    * LIRI will take the text inside of `random.txt` and then use it to call one of LIRI's commands.
